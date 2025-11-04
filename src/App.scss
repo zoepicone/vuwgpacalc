@@ -1,0 +1,73 @@
+@use "@picocss/pico/scss/colors" as *;
+
+small {
+  color: $grey-500;
+}
+
+.warning {
+  border-color: $red-400;
+  background-color: $red-400;
+  box-shadow: inherit inherit $red-300;
+}
+
+.warning:hover {
+  background-color: $red-500;
+}
+
+.warning {
+
+}
+
+.appHeader {
+  text-align: center;
+}
+
+.container-fluid {
+  display: flex;
+}
+
+.sidebar {
+  flex: 0.2;
+  margin: 0 1em 0 1em
+}
+
+.yearButton {
+  width: 100%;
+  margin-bottom: 1em
+}
+
+.yearCardButtons {
+  display: flex;
+}
+
+.trimesterButton {
+  margin-right: 1em
+}
+
+.deleteYearButton {
+  margin-left: auto;
+}
+
+.courseInput {
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+.courseForm {
+  display: flex;
+  gap: 1rem
+}
+
+.formDeleteButton {
+  max-height: calc(1rem * var(--pico-line-height) + var(--pico-form-element-spacing-vertical) * 2 + var(--pico-border-width) * 2);
+  align-self: center
+}
+
+tr:last-child td {
+  border-bottom-style: hidden;
+  padding-bottom: 0;
+}
+
+.mainbar {
+  flex: 0.8
+}
