@@ -2,23 +2,20 @@ import type {Course, Trimester} from "../DataClasses.ts";
 import {useCallback, useEffect, useState} from "react";
 import CourseInput from "./CourseInput.tsx";
 import { v7 as uuidv7 } from 'uuid'
-import {useMountEffect} from "../utils/UseMountEffect.ts";
 
 export default function TrimesterCard({ trimesterNumber, trimester, deleteCallback, updateCallback }:
 { trimesterNumber: number, trimester: Trimester, deleteCallback: (trimesterId: string) => void, updateCallback: (trimesterId: string, courseList: Course[]) => void }
 ) {
-  const [courseList, setCourseList] = useState<Course[]>([]);
+  const [courseList, setCourseList] = useState<Course[]>(trimester.courses);
 
   useEffect(() => {
     updateCallback(trimester.id, courseList)
   }, [courseList, trimester.id])
 
-  useMountEffect(() => setCourseList(trimester.courses))
-
   function addCourse() {
     const uuid = uuidv7();
-    setCourseList([...courseList, {id: uuid, name: '', grade: '', points: ''}])
-    trimester.courses.push({ id: uuid, name: '', grade: '', points: ''});
+    setCourseList([...courseList, {id: uuid, name: '', grade: '', points: 0}])
+    trimester.courses.push({ id: uuid, name: '', grade: '', points: 0});
   }
 
   const deleteCourse = useCallback((courseId : string) => {

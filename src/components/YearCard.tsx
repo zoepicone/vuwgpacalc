@@ -2,18 +2,15 @@ import type {Year, Trimester, Course} from "../DataClasses.ts";
 import {useCallback, useEffect, useState} from "react";
 import { v7 as uuidv7 } from 'uuid'
 import TrimesterCard from "./TrimesterCard.tsx";
-import {useMountEffect} from "../utils/UseMountEffect.ts";
 
 export default function YearCard({ yearNumber, year, deleteCallback, updateCallback }:
 { yearNumber: number, year: Year, deleteCallback: (yearId: string) => void, updateCallback: (yearId: string, trimesterList: Trimester[]) => void }
 ) {
-  const [trimesterList, setTrimesterList] = useState<Trimester[]>([]);
+  const [trimesterList, setTrimesterList] = useState<Trimester[]>(year.trimesters);
 
   useEffect(() => {
     updateCallback(year.id, trimesterList)
   }, [trimesterList, year.id])
-
-  useMountEffect(() => setTrimesterList(year.trimesters))
 
   function addTrimester() {
     const uuid = uuidv7();

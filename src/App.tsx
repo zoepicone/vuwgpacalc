@@ -13,7 +13,6 @@ function App() {
   useMountEffect(() => {
     localForage.getItem('yearList', function (err, data : Year[] | null) {
       if (err || !data) return;
-      console.log(data)
       setYearList(data);
     });
   });
@@ -43,17 +42,20 @@ function App() {
   }, [yearList])
 
   function calculateGpa() {
-    const courses = yearList.flatMap((year) => {
+    const calcData = yearList.flatMap((year) => {
       return year.trimesters.flatMap((trimester) => {
         return trimester.courses
       })
-    })
-    const calcData = courses.map((course) => {
-      // @ts-expect-error - there should be no blank string at this point
-      // of course i haven't written validation yet so there probably will be lol
+    }).map((course) => {
+      if (course.grade == '' || course.points < 1) {
+        return;
+      }
       return [Grades[course.grade], course.points]
-    })
-    const totalPoints = calcData.reduce((acc, current) => acc+current[1], 0)
+    }).filter((data) => data !== undefined)
+
+    console.log(calcData)
+
+    const totalPoints = calcData.reduce((acc, current) => acc + current[1], 0)
     const totalGradePoints = calcData.reduce((acc, current) => acc + (current[0] * current[1]), 0)
 
     setGpa(totalGradePoints / totalPoints)
@@ -77,7 +79,7 @@ function App() {
           </div>
       </main>
       <footer>
-        <small>Created 2025 by Zoe. Published under the GNU Affero General Public License version 3.</small>
+        <small>Copyright (C) 2025 Zoe Picone. Published under the GNU Affero General Public License version 3. <a href="https://github.com/zoepicone/vuwgpacalc">Source</a></small>
       </footer>
     </>
   )

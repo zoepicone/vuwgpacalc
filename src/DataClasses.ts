@@ -8,7 +8,7 @@ export interface Course {
   id: string;
   name: string;
   grade: GradeStrings;
-  points: number | '';
+  points: number;
 }
 
 export interface Trimester {
