@@ -1,14 +1,24 @@
 import type {Course, Trimester} from "../DataClasses.ts";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import CourseInput from "./CourseInput.tsx";
 import { v7 as uuidv7 } from 'uuid'
+import {useMountEffect} from "../utils/UseMountEffect.ts";
 
-export default function TrimesterCard({ trimesterNumber, trimester, deleteCallback }: { trimesterNumber: number, trimester: Trimester, deleteCallback: (trimesterId: string) => void }) {
+export default function TrimesterCard({ trimesterNumber, trimester, deleteCallback, updateCallback }:
+{ trimesterNumber: number, trimester: Trimester, deleteCallback: (trimesterId: string) => void, updateCallback: (trimesterId: string, courseList: Course[]) => void }
+) {
   const [courseList, setCourseList] = useState<Course[]>([]);
+
+  useEffect(() => {
+    updateCallback(trimester.id, courseList)
+  }, [courseList, trimester.id])
+
+  useMountEffect(() => setCourseList(trimester.courses))
 
   function addCourse() {
     const uuid = uuidv7();
     setCourseList([...courseList, {id: uuid, name: '', grade: '', points: ''}])
+    trimester.courses.push({ id: uuid, name: '', grade: '', points: ''});
   }
 
   const deleteCourse = useCallback((courseId : string) => {
@@ -42,7 +52,7 @@ export default function TrimesterCard({ trimesterNumber, trimester, deleteCallba
         <h3>Trimester {trimesterNumber}</h3>
         <div className="yearCardButtons">
           <button className="trimesterButton" onClick={addCourse}>Add Course</button>
-          <button className="deleteYearButton outline warning" onClick={() => deleteCallback(trimester.id)}>🗑︎</button>
+          <button className="deleteYearButton outline" onClick={() => deleteCallback(trimester.id)}>🗑︎</button>
         </div>
       </header>
       <main className="container">

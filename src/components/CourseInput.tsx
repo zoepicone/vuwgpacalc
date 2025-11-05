@@ -19,7 +19,7 @@ export default function CourseInput({ course, deleteCallback, handleChange }: {
   }
 
   const onInputChange = useCallback((e: { target: { name: string; value: string | number; }; }) => {
-    handleChange(course.id, e.target.name, e.target.value);
+    handleChange(course.id, e.target.name, (e.target.name == "points" ? Number(e.target.value) : e.target.value));
   }, [handleChange, course.id]);
 
   return (
