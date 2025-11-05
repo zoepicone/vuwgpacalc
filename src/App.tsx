@@ -11,7 +11,7 @@ function App() {
   const [gpa, setGpa] = useState<number>(NaN);
 
   useMountEffect(() => {
-    localForage.getItem('yearList', function (err, data : Year[] | null) {
+    localForage.getItem('vuwgpa-yearList', function (err, data : Year[] | null) {
       if (err || !data) return;
       setYearList(data);
     });
@@ -59,7 +59,7 @@ function App() {
     const totalGradePoints = calcData.reduce((acc, current) => acc + (current[0] * current[1]), 0)
 
     setGpa(totalGradePoints / totalPoints)
-    localForage.setItem('yearList', yearList)
+    localForage.setItem('vuwgpa-yearList', yearList)
   }
 
   return (
