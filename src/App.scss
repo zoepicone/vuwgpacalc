@@ -49,7 +49,7 @@ small {
 
 .courseForm {
   display: flex;
-  gap: 1rem
+  gap: 1rem;
 }
 
 .formDeleteButton {
@@ -64,4 +64,14 @@ tr:last-child td {
 
 .mainbar {
   flex: 0.8
+}
+
+@media (max-width: 576px) {
+  .container-fluid {
+    flex-direction: column;
+  }
+
+  .courseForm {
+    flex-direction: column;
+  }
 }
