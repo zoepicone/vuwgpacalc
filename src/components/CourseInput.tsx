@@ -61,7 +61,7 @@ export default function CourseInput({ course, deleteCallback, handleChange }: {
                    }
                  }} />
         </fieldset>
-        <button className="formDeleteButton outline secondary" onClick={() => deleteCallback(course.id)}>🗑</button>
+        <button className="formDeleteButton outline secondary" onClick={() => deleteCallback(course.id)}>🗑︎</button>
       </div>
     </form>
   )
