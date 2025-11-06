@@ -1,22 +1,16 @@
-@use "@picocss/pico/scss/colors" as *;
-
 small {
-  color: $grey-500;
+  color: #777777;
 }
 
-.warning {
-  border-color: $red-400;
-  background-color: $red-400;
-  box-shadow: inherit inherit $red-300;
-}
-
-.warning:hover {
-  background-color: $red-500;
-}
-
-.warning {
-
-}
+//.warning {
+//  border-color: $red-400;
+//  background-color: $red-400;
+//  box-shadow: inherit inherit $red-300;
+//}
+//
+//.warning:hover {
+//  background-color: $red-500;
+//}
 
 .appHeader {
   text-align: center;

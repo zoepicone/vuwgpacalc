@@ -1,7 +1,23 @@
 @use "@picocss/pico/scss/pico" with (
   $semantic-root-element: "#root",
   $enable-semantic-container: true,
-  $theme-color: "jade"
+  $theme-color: "jade",
+  $modules: (
+    "content/code": false,
+    "forms/checkbox-radio-switch": false,
+    "forms/input-color": false,
+    "forms/input-date": false,
+    "forms/input-file": false,
+    "forms/input-range": false,
+    "forms/input-search": false,
+    "components/accordion": false,
+    "components/dropdown": false,
+    "components/loading": false,
+    "components/modal": false,
+    "components/nav": false,
+    "components/progress": false,
+    "components/tooltip": false,
+  )
 );
 
 body {
